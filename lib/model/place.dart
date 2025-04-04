@@ -4,7 +4,7 @@ class Place {
   final String subtitle;
   final String description;
 
-  Place({
+  const Place({
     required this.image,
     required this.title,
     required this.subtitle,

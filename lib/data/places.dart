@@ -1,6 +1,6 @@
 import '../model/place.dart';
 
-List<Place> allPlaces = <Place>[
+const allPlaces = <Place>[
   Place(
     image: 'images/fairymedows.jpg',
     title: 'Fairy Meadows',
