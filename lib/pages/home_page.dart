@@ -23,10 +23,7 @@ class HomePage extends StatelessWidget {
 }
 
 Widget buildMobile() {
-  return Container(
-    color: Colors.red,
-    child: const Center(child: Text('Mobile View')),
-  );
+  return Column(children: [Expanded(child: PlaceGalleryWidget())]);
 }
 
 Widget buildTablet() {

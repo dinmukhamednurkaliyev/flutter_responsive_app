@@ -10,6 +10,17 @@ class PlaceDetailWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
     final fontSize = MediaQuery.of(context).size.width * 0.025;
+
+    return LayoutBuilder(
+      builder:
+          (_, constraints) =>
+              constraints.maxHeight >= 600.0
+                  ? buildLargeWidget(color, fontSize)
+                  : buildSmallWidget(color, fontSize),
+    );
+  }
+
+  Widget buildSmallWidget(Color color, double fontSize) {
     return ListView(
       children: [
         Image.asset(
@@ -22,6 +33,45 @@ class PlaceDetailWidget extends StatelessWidget {
         buildButtons(color),
         buildDescription(fontSize),
       ],
+    );
+  }
+
+  Widget buildLargeWidget(Color color, double fontSize) {
+    return SingleChildScrollView(
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        elevation: 6,
+        margin: const EdgeInsets.all(10),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  Image.asset(
+                    place.image,
+                    height: 320,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                  buildTitle(fontSize),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: buildButtons(color),
+                  ),
+                  buildDescription(fontSize),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
