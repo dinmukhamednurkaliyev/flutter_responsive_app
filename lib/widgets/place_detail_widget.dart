@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_app/model/place.dart';
 
@@ -8,6 +9,7 @@ class PlaceDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).primaryColor;
+    final fontSize = MediaQuery.of(context).size.width * 0.025;
     return ListView(
       children: [
         Image.asset(
@@ -16,14 +18,14 @@ class PlaceDetailWidget extends StatelessWidget {
           width: double.infinity,
           fit: BoxFit.cover,
         ),
-        buildTitle(),
+        buildTitle(fontSize),
         buildButtons(color),
-        buildDescription(),
+        buildDescription(fontSize),
       ],
     );
   }
 
-  Widget buildTitle() {
+  Widget buildTitle(double fontSize) {
     return Container(
       padding: const EdgeInsets.all(24),
       child: Row(
@@ -32,18 +34,28 @@ class PlaceDetailWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(place.title, style: TextStyle(fontSize: 24)),
+                AutoSizeText(
+                  place.title,
+                  minFontSize: 16,
+                  maxFontSize: 32,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: fontSize,
+                  ),
+                ),
                 const SizedBox(height: 8.0),
-                Text(
+                AutoSizeText(
                   place.subtitle,
-                  style: TextStyle(fontSize: 20, color: Colors.grey[500]),
+                  minFontSize: 12,
+                  maxFontSize: 22,
+                  style: TextStyle(fontSize: fontSize, color: Colors.grey[500]),
                 ),
               ],
             ),
           ),
           Icon(Icons.star, color: Colors.red[500]),
           const SizedBox(width: 8.0),
-          const Text('41'),
+          const AutoSizeText('41'),
         ],
       ),
     );
@@ -75,10 +87,15 @@ class PlaceDetailWidget extends StatelessWidget {
     );
   }
 
-  Widget buildDescription() {
+  Widget buildDescription(double fontSize) {
     return Padding(
       padding: const EdgeInsets.all(24),
-      child: Text(place.description, style: TextStyle(fontSize: 16)),
+      child: AutoSizeText(
+        place.description,
+        minFontSize: 12,
+        maxFontSize: 24,
+        style: TextStyle(fontSize: fontSize),
+      ),
     );
   }
 }

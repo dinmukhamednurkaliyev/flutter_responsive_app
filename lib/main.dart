@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tour App - Responsive',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.green,
-        textTheme: const TextTheme(bodyMedium: TextStyle(fontSize: 24)),
-      ),
+      theme: ThemeData(colorSchemeSeed: Colors.green),
       home: const HomePage(),
     );
   }

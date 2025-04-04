@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_app/widgets/drawer_widget.dart';
+import 'package:flutter_responsive_app/widgets/place_gallery_widget.dart';
 import 'package:flutter_responsive_app/widgets/responsive_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -29,9 +30,11 @@ Widget buildMobile() {
 }
 
 Widget buildTablet() {
-  return Container(
-    color: Colors.blue,
-    child: const Center(child: Text('Tablet View')),
+  return Row(
+    children: [
+      Expanded(flex: 2, child: DrawerWidget()),
+      Expanded(flex: 5, child: PlaceGalleryWidget()),
+    ],
   );
 }
 

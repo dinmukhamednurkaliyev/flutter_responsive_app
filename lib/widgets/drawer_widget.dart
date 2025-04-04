@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_app/data/states.dart';
 
@@ -6,15 +7,18 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fontSize = MediaQuery.of(context).size.width * 0.025;
     return ListView.builder(
       itemCount: allStates.length + 1,
       itemBuilder: (context, index) {
-        return index == 0 ? buildHeader() : buildMenuItem(index);
+        return index == 0
+            ? buildHeader(fontSize)
+            : buildMenuItem(index, fontSize);
       },
     );
   }
 
-  Widget buildHeader() {
+  Widget buildHeader(double fontSize) {
     return DrawerHeader(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -24,18 +28,25 @@ class DrawerWidget extends StatelessWidget {
       ),
       child: Container(
         alignment: AlignmentDirectional.bottomStart,
-        child: Text(
+        child: AutoSizeText(
           'Pakistan',
-          style: TextStyle(fontSize: 26, color: Colors.white),
+          minFontSize: 22,
+          maxFontSize: 30,
+          style: TextStyle(fontSize: fontSize, color: Colors.white),
         ),
       ),
     );
   }
 
-  Widget buildMenuItem(int index) {
+  Widget buildMenuItem(int index, double fontSize) {
     return ListTile(
       leading: const Icon(Icons.location_city),
-      title: Text(allStates[index - 1], style: TextStyle(fontSize: 22)),
+      title: AutoSizeText(
+        allStates[index - 1],
+        minFontSize: 18,
+        maxFontSize: 28,
+        style: TextStyle(fontSize: fontSize),
+      ),
     );
   }
 }
