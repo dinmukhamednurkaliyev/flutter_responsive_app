@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_app/pages/home_page.dart';
 
@@ -12,9 +14,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      scrollBehavior: CustomScrollBehavior(),
       title: 'Tour App - Responsive',
       theme: ThemeData(colorSchemeSeed: Colors.green),
       home: const HomePage(),
     );
   }
+}
+
+class CustomScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.mouse,
+    PointerDeviceKind.touch,
+  };
 }
